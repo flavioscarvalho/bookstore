@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from order.models import Order  # Corrigido para importar a classe Order diretamente
 from product.models import Product
 from product.serializers.product_serializer import ProductSerializer
 
@@ -12,5 +13,6 @@ class OrderSerializer(serializers.ModelSerializer):
     return total
 
   class Meta:
-    model = Product
+    model = Order  # Corrigido para usar o modelo Order
     fields = ['product', 'total']
+

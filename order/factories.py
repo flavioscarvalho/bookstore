@@ -1,32 +1,42 @@
+# import factory
+# from factory.django import DjangoModelFactory
+# from order.models import Order
+# from product.factories import ProductFactory
+# from django.contrib.auth.models import User
+
+# class OrderFactory(DjangoModelFactory):
+#     class Meta:
+#         model = Order
+#         skip_postgeneration_save = True
+
+#     user = factory.SubFactory(factory.django.DjangoModelFactory, model=User)
+
+#     @factory.post_generation
+#     def products(self, create, extracted, **kwargs):
+#         if not create:
+#             return
+#         if extracted:
+#             for product in extracted:
+#                 self.product.add(product)
+
 import factory
-from django.contrib.auth.models import User
+from factory.django import DjangoModelFactory
 from order.models import Order
 from product.factories import ProductFactory
+from django.contrib.auth.models import User
 
-class UserFactory(factory.django.DjangoModelFactory):
-    email = factory.Faker('email')
-    username = factory.Faker('user_name')
-
+class OrderFactory(DjangoModelFactory):
     class Meta:
-        model = User
+        model = Order
+        skip_postgeneration_save = True  # Adicionando esta linha para resolver o aviso
 
-class OrderFactory(factory.django.DjangoModelFactory):
-    user = factory.SubFactory(UserFactory)
+    user = factory.SubFactory(factory.django.DjangoModelFactory, model=User)
 
     @factory.post_generation
-    def product(self, create, extracted, **kwargs):
+    def products(self, create, extracted, **kwargs):
         if not create:
             return
-
         if extracted:
             for product in extracted:
                 self.product.add(product)
-
-    class Meta:
-        model = Order
-        skip_postgeneration_save = True  # Adicione esta linha
-
-    @factory.post_generation
-    def post(self, create, extracted, **kwargs):
-        if create:
-            self.save()
+        self.save()  # Salvando a instância após adicionar os produtos

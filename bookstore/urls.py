@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 # C:\Users\profe\Desktop\BOOKSTORE\bookstore\urls.py
 
 from django.contrib import admin
@@ -24,7 +25,9 @@ import debug_toolbar  # Adicione esta linha para importar o debug_toolbar
 from bookstore import views
 
 urlpatterns = [
-    path("__debug__/", include(debug_toolbar.urls)),  # Certifique-se de que esta linha está correta
+    path(
+        "__debug__/", include(debug_toolbar.urls)
+    ),  # Certifique-se de que esta linha está correta
     path("admin/", admin.site.urls),
     re_path("bookstore/(?P<version>(v1|v2))/", include("order.urls")),
     re_path("bookstore/(?P<version>(v1|v2))/", include("product.urls")),

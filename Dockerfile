@@ -23,6 +23,9 @@ RUN apt-get update \
         curl \
         build-essential \
         libpq-dev gcc \
+        python3-dev \
+        python3-pip \
+    && pip install psycopg2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

@@ -25,6 +25,7 @@ from order.models import Order
 from product.factories import ProductFactory
 from django.contrib.auth.models import User
 
+
 class OrderFactory(DjangoModelFactory):
     class Meta:
         model = Order

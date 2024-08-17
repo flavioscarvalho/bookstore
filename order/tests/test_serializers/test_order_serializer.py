@@ -7,6 +7,7 @@ from product.factories import ProductFactory
 from order.factories import OrderFactory
 from django.contrib.auth.models import User
 
+
 class TestOrderSerializer(APITestCase):
     client = APIClient()
 
@@ -14,9 +15,11 @@ class TestOrderSerializer(APITestCase):
         self.product_1 = ProductFactory()
         self.product_2 = ProductFactory()
 
-        self.user = User.objects.create_user(username='testuser', password='12345')
-        self.order = OrderFactory(user=self.user, products=[self.product_1, self.product_2])
-        self.client.login(username='testuser', password='12345')
+        self.user = User.objects.create_user(username="testuser", password="12345")
+        self.order = OrderFactory(
+            user=self.user, products=[self.product_1, self.product_2]
+        )
+        self.client.login(username="testuser", password="12345")
 
     def test_order_serializer(self):
         data = {

@@ -177,6 +177,11 @@
 
 import os
 from pathlib import Path
+from typing import List
+import dotenv
+
+# Carregar as variáveis de ambiente do arquivo .env.dev
+dotenv.load_dotenv(".env.dev")
 
 # Diretório base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -199,11 +204,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
-    "rest_framework",
     "order",
     "product",
-    "debug_toolbar",
+    "rest_framework",
     "rest_framework.authtoken",
+    "debug_toolbar",
 ]
 
 # Middlewares configurados
@@ -241,7 +246,7 @@ TEMPLATES = [
 # Configuração WSGI
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
-# Configuração do banco de dados
+
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
@@ -253,20 +258,21 @@ DATABASES = {
     }
 }
 
+
 # Validações de senha
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME":
+     "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+     },
+    {"NAME":
+     "django.contrib.auth.password_validation.MinimumLengthValidator"
+     },
+    {"NAME":
+     "django.contrib.auth.password_validation.CommonPasswordValidator"
+     },
+    {"NAME":
+     "django.contrib.auth.password_validation.NumericPasswordValidator"
+     },
 ]
 
 # Configurações de internacionalização

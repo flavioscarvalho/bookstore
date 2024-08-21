@@ -104,6 +104,7 @@ STATIC_URL = "static/"
 # Configuração do campo de chave primária padrão
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 # IPs internos para ferramentas de depuração
 INTERNAL_IPS = [
     "127.0.0.1",

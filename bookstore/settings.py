@@ -69,11 +69,10 @@ TEMPLATES = [
 # Configuração WSGI
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", str(BASE_DIR / "db.sqlite3")),
         "USER": os.environ.get("SQL_USER", "user"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
@@ -84,22 +83,12 @@ DATABASES = {
     }
 }
 
-
-
 # Validações de senha
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME":
-     "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-     },
-    {"NAME":
-     "django.contrib.auth.password_validation.MinimumLengthValidator"
-     },
-    {"NAME":
-     "django.contrib.auth.password_validation.CommonPasswordValidator"
-     },
-    {"NAME":
-     "django.contrib.auth.password_validation.NumericPasswordValidator"
-     },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 # Configurações de internacionalização
@@ -119,6 +108,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-
 
 print("DB CONFIG:", os.environ.get("SQL_USER"), os.environ.get("SQL_PASSWORD"))

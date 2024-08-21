@@ -11,6 +11,21 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13.0-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: dev
+          POSTGRES_PASSWORD: dev
+          POSTGRES_DB: bookstore_db
+        options: >-
+          --health-cmd="pg_isready -U dev -d bookstore_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
     - uses: actions/checkout@v3
 
@@ -29,4 +44,7 @@ jobs:
       run: poetry install
 
     - name: Run tests
-      run: poetry run python manage.py test
+      env:
+        DATABASE_URL: postgres://dev:dev@localhost:5432/bookstore_db
+      run: |
+        python manage.py test

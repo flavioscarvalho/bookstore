@@ -18,13 +18,18 @@ services:
   db:
     image: postgres:13.0-alpine
     environment:
-      - POSTGRES_USER=bookstore_dev
-      - POSTGRES_PASSWORD=bookstore_dev
-      - POSTGRES_DB=bookstore_dev_db
+      POSTGRES_USER: bookstore_dev
+      POSTGRES_PASSWORD: bookstore_dev
+      POSTGRES_DB: bookstore_dev_db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "bookstore_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   backend:
@@ -32,3 +37,4 @@ networks:
 
 volumes:
   postgres_data:
+    driver: local

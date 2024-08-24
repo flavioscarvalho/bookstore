@@ -1,3 +1,44 @@
+# version: '3.9'
+
+# services:
+#   web:
+#     build: .
+#     command: python manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - .:/usr/src/app/
+#     ports:
+#       - "8000:8000"
+#     env_file:
+#       - ./.env.dev
+#     depends_on:
+#       - db
+#     networks:
+#       - backend
+#     dns:
+#       - 8.8.8.8  # Adicionando servidor DNS
+
+#   db:
+#     image: postgres:13.0-alpine
+#     environment:
+#       - POSTGRES_USER=bookstore
+#       - POSTGRES_PASSWORD=bookstore
+#       - POSTGRES_DB=bookstore_db  # Corrigido de 'bookstore_bd' para 'bookstore_db'
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data/
+#     networks:
+#       - backend
+#     dns:
+#       - 8.8.8.8  # Adicionando servidor DNS
+
+# networks:
+#   backend:
+#     driver: bridge
+
+# volumes:
+#   postgres_data:
+
 version: '3.9'
 
 services:
@@ -21,8 +62,8 @@ services:
     image: postgres:13.0-alpine
     environment:
       - POSTGRES_USER=bookstore
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=banco
+      - POSTGRES_PASSWORD=bookstore
+      - POSTGRES_DB=bookstore_db
     ports:
       - "5432:5432"
     volumes:
@@ -31,6 +72,16 @@ services:
       - backend
     dns:
       - 8.8.8.8  # Adicionando servidor DNS
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - backend
 
 networks:
   backend:

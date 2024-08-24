@@ -1,5 +1,5 @@
 # Set this to ~use it everywhere in the project setup
-PYTHON_VERSION ?= 3.8.10
+PYTHON_VERSION ?= 3.12.2  # Altere para a versão que você está usando
 # the directories containing the library modules this repo builds
 LIBRARY_DIRS = order product bookstore
 # build artifacts organized in this Makefile

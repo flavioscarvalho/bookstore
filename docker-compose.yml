@@ -20,9 +20,9 @@ services:
   db:
     image: postgres:13.0-alpine
     environment:
-      - POSTGRES_USER=bookstore_dev
-      - POSTGRES_PASSWORD=bookstore_dev
-      - POSTGRES_DB=bookstore_dev_db
+      - POSTGRES_USER=bookstore
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=banco
     ports:
       - "5432:5432"
     volumes:

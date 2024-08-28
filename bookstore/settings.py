@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 # Define o caminho para o arquivo .env.dev
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv_path = BASE_DIR / 'env.dev'
+dotenv_path = BASE_DIR / '.env.dev'
 print(f"Loading .env file from {dotenv_path}")
 
 # Carregar as variáveis de ambiente do arquivo .env.dev
@@ -76,14 +76,16 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': SQL_ENGINE,
-        'NAME': SQL_DATABASE,
-        'USER': SQL_USER,
-        'PASSWORD': SQL_PASSWORD,
-        'HOST': SQL_HOST,
-        'PORT': SQL_PORT,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bookstore_db',
+        'USER': 'bookstore',
+        'PASSWORD': 'your_password',
+        'HOST': 'db',  # nome do serviço do banco de dados no docker-compose
+        'PORT': '5432',
     }
 }
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

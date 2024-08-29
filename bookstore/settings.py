@@ -15,10 +15,24 @@ DEBUG = os.getenv('DEBUG', '1').lower() in ["1", "true"]
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-_uql)*)q-k=yx15(*vw#ii-r7p_342(4viiznmi68+^cx=65tm')
 
-# Configurar ALLOWED_HOSTS com valores padrão e permitir localhost:8000
+# Configurar ALLOWED_HOSTS com valores padrão e permitir localhost e 0.0.0.0
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1]').split(',')
+
+# Adiciona 'localhost' sem porta, para evitar erros de host
+if 'localhost' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('localhost')
+
+# Adiciona 'localhost:8000' explicitamente para resolver o problema de DisallowedHost
 if 'localhost:8000' not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS += ['localhost:8000']
+    ALLOWED_HOSTS.append('localhost:8000')
+
+# Adiciona '0.0.0.0' para aceitar todas as conexões
+if '0.0.0.0' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('0.0.0.0')
+
+# Adiciona '127.0.0.1:8000' se estiver faltando
+if '127.0.0.1:8000' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('127.0.0.1:8000')
 
 SQL_ENGINE = os.getenv('SQL_ENGINE', 'django.db.backends.postgresql')
 SQL_DATABASE = os.getenv('SQL_DATABASE', 'bookstore_dev_db')
@@ -76,15 +90,14 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookstore_db',
-        'USER': 'bookstore',
-        'PASSWORD': 'your_password',
-        'HOST': 'db',  # nome do serviço do banco de dados no docker-compose
-        'PORT': '5432',
+        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': os.getenv('SQL_DATABASE', 'bookstore_db'),
+        'USER': os.getenv('SQL_USER', 'bookstore'),
+        'PASSWORD': os.getenv('SQL_PASSWORD', 'bookstore'),
+        'HOST': os.getenv('SQL_HOST', 'db'),
+        'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [

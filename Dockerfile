@@ -19,14 +19,15 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 # Instalando dependências do sistema e do Python
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
         curl \
         build-essential \
         libpq-dev \
         python3-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+        bash && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Instalando o Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
@@ -54,6 +55,12 @@ ENV PYTHONUNBUFFERED=1 \
 
 # Adicionando venv ao PATH
 ENV PATH="$VENV_PATH/bin:$PATH"
+
+# Instalando bash no estágio final
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y bash && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copiando apenas os arquivos necessários para o estágio final
 COPY --from=python-base $POETRY_HOME $POETRY_HOME

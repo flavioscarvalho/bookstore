@@ -17,11 +17,11 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: dev
-          POSTGRES_PASSWORD: dev
-          POSTGRES_DB: bookstore_db
+          POSTGRES_USER: bookstore_dev
+          POSTGRES_PASSWORD: bookstore_dev
+          POSTGRES_DB: bookstore_dev_db
         options: >-
-          --health-cmd="pg_isready -U dev -d bookstore_db"
+          --health-cmd="pg_isready -U bookstore_dev -d bookstore_dev_db"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -44,7 +44,11 @@ jobs:
       run: poetry install
 
     - name: Wait for Postgres to be ready
-      run: sleep 10
+      run: |
+        until pg_isready -h db -p 5432 -U bookstore_dev -d bookstore_dev_db; do
+          echo "Waiting for PostgreSQL..."
+          sleep 2
+        done
 
     - name: Run tests
       env:

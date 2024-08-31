@@ -1,8 +1,12 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Diretório base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Carregar variáveis de ambiente do arquivo .env.dev
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env.dev'))
 
 # Chave secreta para a aplicação Django
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_uql)*)q-k=yx15(*vw#ii-r7p_342(4viiznmi68+^cx=65tm")
@@ -11,7 +15,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_uql)*)q-k=yx15(*vw#i
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 # Hosts permitidos para acessar a aplicação
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
 
 # Aplicações instaladas
 INSTALLED_APPS = [

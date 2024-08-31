@@ -32,23 +32,3 @@ networks:
 
 volumes:
   postgres_data:
-
-
-
-
-
-# #verificar posteriormente o código abaixo, modificado em 17/08
-
-# version: '3.8'
-# services:
-#   web:
-#     image: bookstore-web
-#     networks:
-#       - backend
-#   db:
-#     image: postgres:13
-#     networks:
-#       - backend
-# networks:
-#   backend:
-#     driver: bridge

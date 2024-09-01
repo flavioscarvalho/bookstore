@@ -11,6 +11,11 @@ services:
       - POSTGRES_USER=bookstore_dev
       - POSTGRES_PASSWORD=bookstore_dev
       - POSTGRES_DB=bookstore_dev_db
+    healthcheck:  # Adicione esta seção para o healthcheck
+      test: ["CMD-SHELL", "pg_isready -U bookstore_dev -d bookstore_dev_db -h db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - backend
 
@@ -26,7 +31,8 @@ services:
     networks:
       - backend
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Espera até que o banco de dados esteja pronto
 
 volumes:
   postgres_data:

@@ -1,26 +1,33 @@
 name: Python Pull Request Workflow
+
 on: [pull_request]
+
 jobs:
   qa:
     name: Quality check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4  # Use a versão mais recente
         with:
           python-version: 3.12
+
       - name: Install poetry
         run: |
-          pip install -U pip
-          pip install poetry
-          poetry install
-        env:
-          POETRY_VIRTUALENVS_CREATE: false
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+        # Não defina POETRY_VIRTUALENVS_CREATE: false, permitindo ao Poetry criar o ambiente virtual
 
-      - name: Test
+      - name: Install dependencies
         run: |
-          poetry run python manage.py test
+          poetry install --no-interaction --no-root  # Instale todas as dependências
+
+      - name: Run tests
+        run: |
+          poetry run python manage.py test  # Rode os testes com o ambiente virtual do Poetry
+
       - name: Wemake Python Styleguide
         uses: wemake-services/wemake-python-styleguide@0.16.0
         continue-on-error: true

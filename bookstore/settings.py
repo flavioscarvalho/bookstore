@@ -188,7 +188,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_uql)*)q-k=yx15(*vw#i
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 # Hosts permitidos para acessar a aplicação
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
+
 
 # Aplicações instaladas
 INSTALLED_APPS = [

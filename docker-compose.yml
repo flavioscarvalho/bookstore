@@ -17,6 +17,8 @@ services:
       - db
   db:
     image: postgres:13.0-alpine
+    ports:
+     - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
@@ -35,20 +37,3 @@ volumes:
 
 
 
-
-
-# #verificar posteriormente o código abaixo, modificado em 17/08
-
-# version: '3.8'
-# services:
-#   web:
-#     image: bookstore-web
-#     networks:
-#       - backend
-#   db:
-#     image: postgres:13
-#     networks:
-#       - backend
-# networks:
-#   backend:
-#     driver: bridge

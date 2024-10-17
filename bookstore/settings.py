@@ -96,6 +96,9 @@ DATABASES = {
         'PASSWORD': os.getenv('SQL_PASSWORD', 'bookstore_dev'),
         'HOST': os.getenv('SQL_HOST', 'db'),
         'PORT': os.getenv('SQL_PORT', '5432'),
+        'OPTIONS': {
+            'options': '-c client_encoding=UTF8',  # Adiciona a codificação UTF-8
+        }
     }
 }
 

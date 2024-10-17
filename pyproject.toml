@@ -7,17 +7,17 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-pytest = "^8.3.2"
-factory-boy = "^3.3.0"
 django = "^5.0.7"
 django-extensions = "^3.2.3"
 django-debug-toolbar = "^4.4.6"
-djangorestframework = "^3.14.0"  # Adicione esta linha
-psycopg2-binary = "^2.9.9"
-flake8 = "^7.1.1"
+djangorestframework = "^3.14.0"  # API REST framework
+psycopg2-binary = "^2.9.9"  # Conector PostgreSQL
+flake8 = "^7.1.1"  # Para linting e verificação de código
 
 [tool.poetry.group.dev.dependencies]
-pytest-django = "^4.9.0"
+pytest = "^8.3.2"  # Ferramenta de testes
+pytest-django = "^4.9.0"  # Integração com Django para testes
+factory-boy = "^3.3.0"  # Ferramenta para criar objetos de teste
 
 [build-system]
 requires = ["poetry-core"]

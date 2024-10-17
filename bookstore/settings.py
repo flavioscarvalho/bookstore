@@ -91,9 +91,9 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('SQL_DATABASE', 'bookstore_db'),
-        'USER': os.getenv('SQL_USER', 'bookstore'),
-        'PASSWORD': os.getenv('SQL_PASSWORD', 'bookstore'),
+        'NAME': os.getenv('SQL_DATABASE', 'bookstore_dev_db'),
+        'USER': os.getenv('SQL_USER', 'bookstore_dev'),
+        'PASSWORD': os.getenv('SQL_PASSWORD', 'bookstore_dev'),
         'HOST': os.getenv('SQL_HOST', 'db'),
         'PORT': os.getenv('SQL_PORT', '5432'),
     }

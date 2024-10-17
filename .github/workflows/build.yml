@@ -17,11 +17,11 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: dev
-          POSTGRES_PASSWORD: dev
-          POSTGRES_DB: bookstore_db
+          POSTGRES_USER: bookstore_dev
+          POSTGRES_PASSWORD: bookstore_dev
+          POSTGRES_DB: bookstore_dev_db
         options: >-
-          --health-cmd="pg_isready -U dev -d bookstore_db"
+          --health-cmd="pg_isready -U bookstore_dev -d bookstore_dev_db"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -43,11 +43,8 @@ jobs:
     - name: Install dependencies
       run: poetry install
 
-    - name: Wait for Postgres to be ready
-      run: sleep 10
-
     - name: Run tests
       env:
-        DATABASE_URL: postgres://dev:dev@localhost:5432/bookstore_db
+        DATABASE_URL: postgres://bookstore_dev:bookstore_dev@localhost:5432/bookstore_dev_db
       run: |
         poetry run python manage.py test

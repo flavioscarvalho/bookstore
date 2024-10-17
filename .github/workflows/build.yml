@@ -43,8 +43,12 @@ jobs:
     - name: Install dependencies
       run: poetry install
 
+    - name: Wait for Postgres to be ready
+      run: |
+        until pg_isready -h db -p 5432; do echo "Waiting for Postgres..."; sleep 5; done
+
     - name: Run tests
       env:
-        DATABASE_URL: postgres://bookstore_dev:bookstore_dev@localhost:5432/bookstore_dev_db
+        DATABASE_URL: postgres://bookstore_dev:bookstore_dev@db:5432/bookstore_dev_db
       run: |
         poetry run python manage.py test

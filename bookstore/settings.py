@@ -10,6 +10,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_uql)*)q-k=yx15(*vw#i
 # Modo de depuração (True para desenvolvimento, False para produção)
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
+
+
 # Hosts permitidos para acessar a aplicação
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ebac-api-bookstore-469dc7be49a5.herokuapp.com']
 

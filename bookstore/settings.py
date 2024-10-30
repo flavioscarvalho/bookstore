@@ -242,8 +242,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # Número de itens por página
 
-    # Comentando ou removendo as classes de autenticação e permissão
-    # Isso permitirá que os endpoints sejam acessados sem autenticação
+    # #Comentando ou removendo as classes de autenticação e permissão
+    # #Isso permitirá que os endpoints sejam acessados sem autenticação
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #     'rest_framework.authentication.TokenAuthentication',
     #     'rest_framework.authentication.SessionAuthentication',

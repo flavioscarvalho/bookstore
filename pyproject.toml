@@ -13,6 +13,8 @@ django-debug-toolbar = "^4.4.6"
 djangorestframework = "^3.14.0"  # API REST framework
 psycopg2-binary = "^2.9.9"  # Conector PostgreSQL
 flake8 = "^7.1.1"  # Para linting e verificação de código
+whitenoise = "^6.8.2"
+gunicorn = "^23.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"  # Ferramenta de testes

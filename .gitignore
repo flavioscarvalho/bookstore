@@ -129,6 +129,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+staticfiles/
 
 # Spyder project settings
 .spyderproject
@@ -162,3 +163,4 @@ cython_debug/
 #.idea/
 __pycache__/
 db.sqlite3
+staticfiles/
